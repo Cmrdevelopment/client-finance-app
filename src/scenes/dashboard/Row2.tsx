@@ -1,4 +1,3 @@
-import React from 'react';
 import DashboardBox from '@/componets/DashboardBox';
 
 type Props = {}
@@ -13,4 +12,4 @@ const Row2 = (props: Props) => {
   )
 }
 
-export default Row2
+export default Row2;
