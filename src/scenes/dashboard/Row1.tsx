@@ -3,12 +3,14 @@ import { useGetKpisQuery } from '@/state/api';
 import { 
   ResponsiveContainer,
   CartesianGrid, 
-  AreaChart, 
+  AreaChart,
+  LineChart, 
   XAxis, 
   YAxis,
+  Legend,
   Line, 
   Tooltip, 
-  Area 
+  Area,
 } from 'recharts';
 import { useTheme } from "@mui/material";
 import { useMemo } from "react";
@@ -19,6 +21,7 @@ type Props = {}
 const Row1 = (props: Props) => {
   const { palette } = useTheme();
   const { data } = useGetKpisQuery();
+  
   const revenueExpenses = useMemo(() => {
     return (
       data &&
@@ -27,6 +30,19 @@ const Row1 = (props: Props) => {
           name: month.substring(0, 3),
           revenue: revenue,
           expenses: expenses,
+        };
+      })
+    );
+  }, [data]);
+
+  const revenueProfit = useMemo(() => {
+    return (
+      data &&
+      data[0].monthlyData.map(({ month, revenue, expenses }) => {
+        return {
+          name: month.substring(0, 3),
+          revenue: revenue,
+          profit: revenue - expenses,
         };
       })
     );
@@ -117,15 +133,15 @@ const Row1 = (props: Props) => {
         sideText="+4%"
       />
     <ResponsiveContainer width="100%" height="100%">
-        <AreaChart
+        <LineChart
           width={500}
           height={400}
-          data={revenueExpenses}
+          data={revenueProfit}
           margin={{
-            top: 15,
-            right: 25,
+            top: 20,
+            right: 0,
             left: -10,
-            bottom: 60,
+            bottom: 55,
           }}
         >
           <CartesianGrid vertical={false} stroke={palette.grey[800]} />   
@@ -148,6 +164,12 @@ const Row1 = (props: Props) => {
               style={{ fontSize: "10px" }}
             />
           <Tooltip />
+          <Legend
+              height={20}
+              wrapperStyle={{
+              margin: "0 0 10px 0",
+              }}
+            />
           <Line 
           yAxisId="left"
           type="monotone"
@@ -155,20 +177,13 @@ const Row1 = (props: Props) => {
           stroke={palette.tertiary[500]}
           />
           <Line
+              yAxisId="right"
               type="monotone"
-              dataKey="expenses"
-              dot={true}
+              dataKey="revenue"
               stroke={palette.primary.main}
-              fillOpacity={1}
-              fill="url(#colorExpenses)"
           />
-        </AreaChart>
+        </LineChart>
       </ResponsiveContainer>
-
-
-
-
-
 
     </DashboardBox>
 
