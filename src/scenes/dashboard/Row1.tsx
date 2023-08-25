@@ -17,12 +17,13 @@ import {
 import { useTheme } from "@mui/material";
 import { useMemo } from "react";
 import BoxHeader from '@/componets/BoxHeader';
+import { PaletteType } from '@/componets/types/paletteTypes';
 
 
 const Row1 = () => {
   const { palette } = useTheme();
   const { data } = useGetKpisQuery();
-
+  const typedPalette = palette as unknown as { grey: PaletteType, primary: PaletteType, secondary: PaletteType, tertiary: PaletteType };
   const revenue = useMemo(() => {
     return (
       data &&
@@ -86,24 +87,24 @@ const Row1 = () => {
             <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
-                  stopColor={palette.primary[300]}
+                  stopColor={typedPalette.primary[300]}
                   stopOpacity={0.5}
                 />
                 <stop
                   offset="95%"
-                  stopColor={palette.primary[300]}
+                  stopColor={typedPalette.primary[300]}
                   stopOpacity={0}
                 />
             </linearGradient>
             <linearGradient id="colorExpenses" x1="0" y1="0" x2="0" y2="1">
             <stop
                   offset="5%"
-                  stopColor={palette.primary[300]}
+                  stopColor={typedPalette.primary[300]}
                   stopOpacity={0.5}
                 />
                 <stop
                   offset="95%"
-                  stopColor={palette.primary[300]}
+                  stopColor={typedPalette.primary[300]}
                   stopOpacity={0}
                 />
             </linearGradient>            
@@ -158,7 +159,7 @@ const Row1 = () => {
             bottom: 55,
           }}
         >
-          <CartesianGrid vertical={false} stroke={palette.grey[800]} />   
+          <CartesianGrid vertical={false} stroke={typedPalette.grey[800]} />   
           <XAxis
               dataKey="name"
               tickLine={false}
@@ -188,7 +189,7 @@ const Row1 = () => {
           yAxisId="left"
           type="monotone"
           dataKey="profit"
-          stroke={palette.tertiary[500]}
+          stroke={typedPalette.tertiary[500]}
           />
           <Line
               yAxisId="right"
@@ -222,17 +223,17 @@ const Row1 = () => {
               <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
-                  stopColor={palette.primary[300]}
+                  stopColor={typedPalette.primary[300]}
                   stopOpacity={0.8}
                 />
                 <stop
                   offset="95%"
-                  stopColor={palette.primary[300]}
+                  stopColor={typedPalette.primary[300]}
                   stopOpacity={0}
                 />
               </linearGradient>
           </defs>
-          <CartesianGrid vertical={false} stroke={palette.grey[800]} />
+          <CartesianGrid vertical={false} stroke={typedPalette.grey[800]} />
           <XAxis
               dataKey="name"
               axisLine={false}

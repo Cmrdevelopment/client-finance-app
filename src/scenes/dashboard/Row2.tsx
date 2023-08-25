@@ -1,6 +1,7 @@
 import BoxHeader from '@/componets/BoxHeader';
 import DashboardBox from '@/componets/DashboardBox';
 import FlexBetween from '@/componets/FlexBetween';
+import { PaletteType } from '@/componets/types/paletteTypes';
 import { useGetKpisQuery, useGetProductsQuery } from '@/state/api';
 import { Box, Typography, useTheme } from '@mui/material';
 import { useMemo } from "react";
@@ -27,7 +28,10 @@ const pieData = [
 
 const Row2 = () => {
   const { palette } = useTheme();
-  const pieColors = [palette.primary[800], palette.primary[300]]
+  const typedPalette = palette as unknown as { primary: PaletteType, tertiary: PaletteType };
+  
+  const pieColors = [typedPalette.primary[800], typedPalette.primary[300]]
+  
   const { data: operationalData } = useGetKpisQuery();
   const { data: productData } = useGetProductsQuery();
   const operationalExpenses = useMemo(() => {
@@ -100,7 +104,7 @@ const Row2 = () => {
           yAxisId="left"
           type="monotone"
           dataKey="Non Operational Expenses"
-          stroke={palette.tertiary[500]}
+          stroke={typedPalette.tertiary[500]}
           />
           <Line
               yAxisId="right"
@@ -134,7 +138,7 @@ const Row2 = () => {
         >
           {pieData.map((entry, index) => (
             <Cell 
-            key={`cell-${index}`}
+            key={`cell-${entry.name}-${index}`}
             fill={pieColors[index]} 
             />
           ))}
@@ -143,7 +147,7 @@ const Row2 = () => {
       </PieChart>
       <Box ml="-0.7rem" flexBasis="40%" textAlign="center">
             <Typography variant="h5">Target Sales</Typography>
-            <Typography m="0.3rem 0" variant="h3" color={palette.primary[300]}>
+            <Typography m="0.3rem 0" variant="h3" color={typedPalette.primary[300]}>
               83
             </Typography>
             <Typography variant="h6">
@@ -197,7 +201,7 @@ const Row2 = () => {
             <Scatter
               name="Product Expense Ratio"
               data={productExpenseData}
-              fill={palette.tertiary[500]}
+              fill={typedPalette.tertiary[500]}
             />
           </ScatterChart>
         </ResponsiveContainer>

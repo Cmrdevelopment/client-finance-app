@@ -1,6 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import React from "react";
 import FlexBetween from "./FlexBetween";
+import { PaletteType } from "./types/paletteTypes";
 
 type Props = {
   title: string;
@@ -11,6 +12,9 @@ type Props = {
 
 const BoxHeader = ({ icon, title, subtitle, sideText }: Props) => {
   const { palette } = useTheme();
+
+  const typedPalette = palette as unknown as { grey: PaletteType, primary: PaletteType, secondary: PaletteType, tertiary: PaletteType };
+
   return (
     <FlexBetween color={palette.grey[400]} margin="1.5rem 1rem 0 1rem">
       <FlexBetween>
@@ -22,7 +26,7 @@ const BoxHeader = ({ icon, title, subtitle, sideText }: Props) => {
           <Typography variant="h6">{subtitle}</Typography>
         </Box>
       </FlexBetween>
-      <Typography variant="h5" fontWeight="700" color={palette.secondary[500]}>
+      <Typography variant="h5" fontWeight="700" color={typedPalette.secondary[500]}>
         {sideText}
       </Typography>
     </FlexBetween>

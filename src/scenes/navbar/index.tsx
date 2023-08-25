@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import PixIcon from "@mui/icons-material/Pix";
 import { Box, Typography, useTheme } from "@mui/material";
 import FlexBetween from '@/componets/FlexBetween';
+import { PaletteType } from '@/componets/types/paletteTypes';
 
-type Props = {};
-
-const Navbar = (props: Props) => {
+const Navbar = () => {
   const { palette } = useTheme();
   const [selected, setSelected] = useState("dashboard");
+  const typedPalette = palette as unknown as { primary: PaletteType, tertiary: PaletteType };
   return (
     <FlexBetween mb="0.25rem" p="0.5rem 0rem" color={palette.grey[300]}>
       {/* LEFT SIDE */}
@@ -21,7 +21,7 @@ const Navbar = (props: Props) => {
 
       {/* RIGHT SIDE */}
       <FlexBetween gap="2rem">
-      <Box sx={{ "&:hover": { color: palette.primary[100] } }}>
+      <Box sx={{ "&:hover": { color: typedPalette.primary[100] } }}>
           <Link
             to="/"
             onClick={() => setSelected("dashboard")}
@@ -33,7 +33,7 @@ const Navbar = (props: Props) => {
             dashboard
           </Link>
         </Box>
-        <Box sx={{ "&:hover": { color: palette.primary[100] } }}>
+        <Box sx={{ "&:hover": { color: typedPalette.primary[100] } }}>
           <Link
             to="/predictions"
             onClick={() => setSelected("predictions")}
