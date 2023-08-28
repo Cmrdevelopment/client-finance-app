@@ -1,7 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import React from "react";
 import FlexBetween from "./FlexBetween";
-import { PaletteType } from "./types/paletteTypes";
+import { PaletteType } from "../types/paletteTypes";
 
 type Props = {
   title: string;

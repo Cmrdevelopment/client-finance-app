@@ -1,7 +1,7 @@
 import BoxHeader from "@/componets/BoxHeader";
 import DashboardBox from "@/componets/DashboardBox";
 import FlexBetween from "@/componets/FlexBetween";
-import { PaletteType } from "@/componets/types/paletteTypes";
+import { PaletteType } from "@/types/paletteTypes";
 import {
   useGetKpisQuery,
   useGetProductsQuery,

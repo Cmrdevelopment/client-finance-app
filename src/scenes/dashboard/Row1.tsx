@@ -17,7 +17,7 @@ import {
 import { useTheme } from "@mui/material";
 import { useMemo } from "react";
 import BoxHeader from '@/componets/BoxHeader';
-import { PaletteType } from '@/componets/types/paletteTypes';
+import { PaletteType } from '@/types/paletteTypes';
 
 
 const Row1 = () => {

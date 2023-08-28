@@ -1,7 +1,7 @@
 import BoxHeader from '@/componets/BoxHeader';
 import DashboardBox from '@/componets/DashboardBox';
 import FlexBetween from '@/componets/FlexBetween';
-import { PaletteType } from '@/componets/types/paletteTypes';
+import { PaletteType } from '@/types/paletteTypes';
 import { useGetKpisQuery, useGetProductsQuery } from '@/state/api';
 import { Box, Typography, useTheme } from '@mui/material';
 import { useMemo } from "react";
